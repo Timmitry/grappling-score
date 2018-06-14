@@ -1,6 +1,7 @@
 import * as React from "react";
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fightersFetchData } from '../../actions/fighters';
+import { actionCreators } from '../../store/Fighters';
 import FighterRow from './FighterRow';
 import './FighterTable.css';
 
@@ -10,11 +11,11 @@ import './FighterTable.css';
 
 class FighterTable extends React.Component {
   componentDidMount() {
-    this.props.fetchData('http://localhost:5000/api/fighters');
+    this.props.fetchData('https://localhost:5001/api/fighters');
   }
 
   render() {
-    const { error, isLoading, fighters } = this.props;
+    const { error, isLoading, fighters } = this.props.fighters;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -50,16 +51,17 @@ class FighterTable extends React.Component {
 
 const mapStateToProps = (state) => (
   {
-    fighters: state.fighters.fighters,
-    error: state.fighters.error,
-    isLoading: state.fighters.isLoading,
+    fighters: state.fighters,
+    error: state.error,
+    isLoading: state.isLoading,
   }
 );
 
 const mapDispatchToProps = (dispatch) => (
-  {
-    fetchData: (url) => dispatch(fightersFetchData(url))
-  }
+  bindActionCreators(actionCreators, dispatch)
+  // {
+  //   fetchData: (url) => dispatch(fightersFetchData(url))
+  // }
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(FighterTable);
