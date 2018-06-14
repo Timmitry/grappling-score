@@ -48,9 +48,9 @@ class FighterTable extends React.Component {
 
 const mapStateToProps = (state) => (
   {
-    fighters: state.fighters,
-    error: state.error,
-    isLoading: state.isLoading,
+    fighters: state.fighters.fighters,
+    error: state.fighters.error,
+    isLoading: state.fighters.isLoading,
   }
 );
 

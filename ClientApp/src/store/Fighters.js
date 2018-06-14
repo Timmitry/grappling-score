@@ -3,9 +3,11 @@ const fightersIsLoadingType = 'FIGHTERS_IS_LOADING';
 const fightersFetchDataSuccessType = 'FIGHTERS_FETCH_DATA_SUCCESS';
 
 const initialState = {
-  fighters: [],
-  isLoading: true,
-  error: null,
+  fighters: {
+    fighters: [],
+    isLoading: true,
+    error: null,
+  }
 };
 
 const fightersHasErrored = error => ({
@@ -43,11 +45,11 @@ export const actionCreators = {
 export const reducer = (state = initialState, action) => {
   switch(action.type) {
     case fightersFetchDataSuccessType:
-      return { ...state, fighters: action.payload.fighters };
+      return { ...state, fighters: { ...state.fighters, fighters: action.payload.fighters } };
     case fightersHasErroredType:
-      return { ...state, error: action.payload.error };
+      return { ...state, fighters: { ...state.fighters, error: action.payload.error } };
     case fightersIsLoadingType:
-      return { ...state, isLoading: action.payload.isLoading };
+      return { ...state, fighters: { ...state.fighters, isLoading: action.payload.isLoading } };
     default:
       return state;
   }
