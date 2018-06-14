@@ -24,19 +24,18 @@ const fightersFetchDataSuccess = fighters => ({
 });
 
 export const actionCreators = {
-  fetchData: (url) => (
-    (dispatch) => {
+  fetchData: url => (
+    async (dispatch) => {
       dispatch(fightersIsLoading(true));
 
-      fetch(url)
-        .then(response => {
-          if (!response.ok) { throw Error(response.statusText); }
-          dispatch(fightersIsLoading(false));
-          return response;
-        })
-        .then(response => response.json())
-        .then(json => dispatch(fightersFetchDataSuccess(json)))
-        .catch(error => dispatch(fightersHasErrored));
+      try {
+        const response = await fetch(url);
+        if (!response.ok) { throw Error(response.statusText); }
+        dispatch(fightersIsLoading(false));
+        dispatch(fightersFetchDataSuccess(await response.json()));
+      } catch(error) {
+        dispatch(fightersHasErrored);
+      }
     }
   ),
 }

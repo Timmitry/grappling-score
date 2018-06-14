@@ -5,10 +5,6 @@ import { actionCreators } from '../../store/Fighters';
 import FighterRow from './FighterRow';
 import './FighterTable.css';
 
-// interface IFighterTableProps extends IFighterState {
-//   fetchData: (url: string) => void,
-// }
-
 class FighterTable extends React.Component {
   componentDidMount() {
     this.props.fetchData('https://localhost:5001/api/fighters');
@@ -31,6 +27,7 @@ class FighterTable extends React.Component {
 
     return (
       <div>
+        <h1>Fighters</h1>
         <table>
           <thead>
             <tr>
@@ -57,11 +54,8 @@ const mapStateToProps = (state) => (
   }
 );
 
-const mapDispatchToProps = (dispatch) => (
-  bindActionCreators(actionCreators, dispatch)
-  // {
-  //   fetchData: (url) => dispatch(fightersFetchData(url))
-  // }
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(actionCreators, dispatch
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(FighterTable);

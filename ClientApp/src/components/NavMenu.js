@@ -8,7 +8,7 @@ export default props => (
   <Navbar inverse fixedTop fluid collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to={'/'}>aspnet_react_template</Link>
+        <Link to={'/'}>Grappling Score</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
@@ -31,7 +31,7 @@ export default props => (
         </LinkContainer>
         <LinkContainer to={'/fighters'}>
           <NavItem>
-            <Glyphicon glyph='th-list' /> Fighters
+            <Glyphicon glyph='fire' /> Fighters
           </NavItem>
         </LinkContainer>
       </Nav>

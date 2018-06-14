@@ -1,11 +1,5 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-// import IFighter from '../../interfaces/IFighter';
-
-// interface IFighterDetailState extends IFighter {
-//   isLoaded: boolean,
-//   error: Error | null,
-// }
 
 export default class FighterDetail extends React.Component {
   constructor(props) {
@@ -23,7 +17,7 @@ export default class FighterDetail extends React.Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch(`http://localhost:5000/api/fighters/${this.state.id}`);
+      const response = await fetch(`https://localhost:5001/api/fighters/${this.state.id}`);
       const fighter = await response.json();
       this.setState({ isLoaded: true, ...fighter });
     } catch(error) {
