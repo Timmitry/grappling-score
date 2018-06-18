@@ -3,13 +3,11 @@ const isLoadingType = 'FIGHTER_IS_LOADING';
 const fetchDataSuccessType = 'FIGHTER_FETCH_DATA_SUCCESS';
 
 const initialState = {
-  // fighter: {
-    firstName: '',
-    lastName: '',
-    score: 0,
-    isLoading: true,
-    error: null,
-  // }
+  firstName: '',
+  lastName: '',
+  score: 0,
+  isLoading: true,
+  error: null,
 };
 
 const hasErrored = error => ({

@@ -1,42 +1,40 @@
-const fightersHasErroredType = 'FIGHTERS_HAS_ERRORED';
-const fightersIsLoadingType = 'FIGHTERS_IS_LOADING';
-const fightersFetchDataSuccessType = 'FIGHTERS_FETCH_DATA_SUCCESS';
+const hasErroredType = 'FIGHTERS_HAS_ERRORED';
+const isLoadingType = 'FIGHTERS_IS_LOADING';
+const fetchDataSuccessType = 'FIGHTERS_FETCH_DATA_SUCCESS';
 
 const initialState = {
-  fighters: {
-    fighters: [],
-    isLoading: true,
-    error: null,
-  }
+  fighters: [],
+  isLoading: true,
+  error: null,
 };
 
-const fightersHasErrored = error => ({
-  type: fightersHasErroredType,
+const hasErrored = error => ({
+  type: hasErroredType,
   payload: { error },
 });
 
-const fightersIsLoading = isLoading => ({
-  type: fightersIsLoadingType,
+const isLoading = isLoading => ({
+  type: isLoadingType,
   payload: { isLoading }
 });
 
-const fightersFetchDataSuccess = fighters => ({
-  type: fightersFetchDataSuccessType,
+const fetchDataSuccess = fighters => ({
+  type: fetchDataSuccessType,
   payload: { fighters }
 });
 
 export const actionCreators = {
   fetchData: url => (
     async (dispatch) => {
-      dispatch(fightersIsLoading(true));
+      dispatch(isLoading(true));
 
       try {
         const response = await fetch(url);
         if (!response.ok) { throw Error(response.statusText); }
-        dispatch(fightersIsLoading(false));
-        dispatch(fightersFetchDataSuccess(await response.json()));
+        dispatch(isLoading(false));
+        dispatch(fetchDataSuccess(await response.json()));
       } catch(error) {
-        dispatch(fightersHasErrored);
+        dispatch(hasErrored);
       }
     }
   ),
@@ -44,12 +42,12 @@ export const actionCreators = {
 
 export const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case fightersFetchDataSuccessType:
-      return { ...state, fighters: { ...state.fighters, fighters: action.payload.fighters } };
-    case fightersHasErroredType:
-      return { ...state, fighters: { ...state.fighters, error: action.payload.error } };
-    case fightersIsLoadingType:
-      return { ...state, fighters: { ...state.fighters, isLoading: action.payload.isLoading } };
+    case fetchDataSuccessType:
+      return { ...state, fighters: action.payload.fighters };
+    case hasErroredType:
+      return { ...state, error: action.payload.error };
+    case isLoadingType:
+      return { ...state, isLoading: action.payload.isLoading };
     default:
       return state;
   }

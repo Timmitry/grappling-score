@@ -21,6 +21,7 @@ class Fighter extends React.Component {
 
     return (
       <div>
+        <h1>{firstName} {lastName}</h1>
         <p>First Name: {firstName}</p>
         <p>Last Name: {lastName}</p>
         <p>Score: {score}</p>
@@ -30,4 +31,7 @@ class Fighter extends React.Component {
   }
 }
 
-export default connect(state => state.fighter, dispatch => bindActionCreators(actionCreators, dispatch))(Fighter);
+export default connect(
+  state => state.fighter,
+  dispatch => bindActionCreators(actionCreators, dispatch)
+)(Fighter);

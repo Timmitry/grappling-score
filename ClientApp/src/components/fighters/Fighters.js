@@ -11,7 +11,7 @@ class Fighters extends React.Component {
   }
 
   render() {
-    const { error, isLoading, fighters } = this.props.fighters;
+    const { error, isLoading, fighters } = this.props;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -46,15 +46,7 @@ class Fighters extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => (
-  {
-    fighters: state.fighters.fighters,
-    error: state.fighters.error,
-    isLoading: state.fighters.isLoading,
-  }
-);
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(actionCreators, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Fighters);
+export default connect(
+  state => state.fighters,
+  dispatch => bindActionCreators(actionCreators, dispatch)
+)(Fighters);
