@@ -31,16 +31,29 @@ namespace WebApi.Controllers
     [HttpGet]
     public ActionResult<IEnumerable<Fighter>> GetAll()
     {
-      return this.fighterContext.Fighters;
+      return this.fighterContext.Fighters.OrderBy(fighter => fighter.Rank).ToList();
     }
 
     [HttpGet("{id}")]
     public ActionResult<Fighter> GetById(long id)
     {
-      var fighter = this.fighterContext.Fighters.Find(id);
+      this.CalculateRankings();
 
-      if (fighter == null) return NotFound();
-      return fighter;
+      var record = this.fighterContext.Fighters.Find(id);
+
+      if (record == null) return NotFound();
+      return record;
+    }
+
+    private void CalculateRankings()
+    {
+      var index = 1;
+      this.fighterContext.Fighters
+        .OrderByDescending(fighter => fighter.Score)
+        .ToList()
+        .ForEach(fighter => fighter.Rank = index++);
+
+      this.fighterContext.SaveChanges();
     }
   }
 }

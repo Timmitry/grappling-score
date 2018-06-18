@@ -10,7 +10,7 @@ class Fighter extends React.Component {
   }
 
   render() {
-    const { error, isLoading, firstName, lastName, score } = this.props;
+    const { error, isLoading, firstName, lastName, score, rank } = this.props;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -25,6 +25,7 @@ class Fighter extends React.Component {
         <p>First Name: {firstName}</p>
         <p>Last Name: {lastName}</p>
         <p>Score: {score}</p>
+        <p>Rank: {rank}</p>
         <p><Link to={'/fighters'}>Back to fighters page</Link></p>
       </div>
     );

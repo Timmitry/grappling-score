@@ -8,6 +8,7 @@ namespace WebApi.Models
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public double Score { get; set; }
+    public int? Rank { get; set; }
 
     public Fighter(string firstName, string lastName, double score)
     {

@@ -20,11 +20,6 @@ class Fighters extends React.Component {
       return <div>Loading...</div>;
     }
 
-    const sortedFightersWithIndex = fighters
-      .slice()
-      .sort((fighter1, fighter2) => fighter2.score - fighter1.score)
-      .map((fighter, index) => ({...fighter, rank: index + 1}));
-
     return (
       <div>
         <h1>Fighters</h1>
@@ -38,7 +33,7 @@ class Fighters extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {sortedFightersWithIndex.map(fighter => (<FighterRow {...fighter}/>))}
+            {fighters.map(fighter => (<FighterRow {...fighter}/>))}
           </tbody>
         </table>
       </div>
