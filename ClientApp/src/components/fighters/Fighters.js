@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/Fighters';
 import FighterRow from './FighterRow';
-import './FighterTable.css';
+import './Fighters.css';
 
-class FighterTable extends React.Component {
+class Fighters extends React.Component {
   componentDidMount() {
     this.props.fetchData('https://localhost:5001/api/fighters');
   }
@@ -55,7 +55,6 @@ const mapStateToProps = (state) => (
 );
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(actionCreators, dispatch
-);
+  bindActionCreators(actionCreators, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(FighterTable);
+export default connect(mapStateToProps, mapDispatchToProps)(Fighters);
