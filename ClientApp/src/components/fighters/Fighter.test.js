@@ -1,6 +1,6 @@
 import * as enzyme from 'enzyme';
 import * as React from 'react';
-import FighterDetail from './FighterDetail';
+import FighterDetail from './Fighter';
 
 describe('FighterDetail', () => {
   let props;
