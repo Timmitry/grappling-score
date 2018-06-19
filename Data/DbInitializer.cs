@@ -27,9 +27,9 @@ namespace WebApi.Data
 
       var matches = new[]
       {
-        new Match(fighters[0], fighters[2], "Win"),
-        new Match(fighters[1], fighters[0], "Loss"),
-        new Match(fighters[4], fighters[1], "Draw"),
+        new Match(fighters[0], fighters[2], Result.Win),
+        new Match(fighters[1], fighters[0], Result.Loss),
+        new Match(fighters[4], fighters[1], Result.Draw),
       };
       context.Matches.AddRange(matches);
       context.SaveChanges();

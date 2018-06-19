@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace WebApi.Models
 {
@@ -11,7 +13,8 @@ namespace WebApi.Models
     public long Id { get; set; }
 
     [DataMember]
-    public string Result { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
+    public Result Result { get; set; }
 
     public long Fighter1Id { get; set; }
 
@@ -27,7 +30,7 @@ namespace WebApi.Models
     {
     }
 
-    public Match(Fighter fighter1, Fighter fighter2, string result)
+    public Match(Fighter fighter1, Fighter fighter2, Result result)
     {
       this.Fighter1 = fighter1;
       this.Fighter2 = fighter2;
