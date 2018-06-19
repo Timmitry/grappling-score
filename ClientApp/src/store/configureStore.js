@@ -5,6 +5,7 @@ import * as Counter from './Counter';
 import * as WeatherForecasts from './WeatherForecasts';
 import * as Fighter from './Fighter';
 import * as Fighters from './Fighters';
+import * as Matches from './Matches';
 
 export default function configureStore(history, initialState) {
   const reducers = {
@@ -12,6 +13,7 @@ export default function configureStore(history, initialState) {
     weatherForecasts: WeatherForecasts.reducer,
     fighter: Fighter.reducer,
     fighters: Fighters.reducer,
+    matches: Matches.reducer,
   };
 
   const middleware = [

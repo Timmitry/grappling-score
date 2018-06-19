@@ -6,6 +6,7 @@ import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 import Fighters from './components/fighters/Fighters';
 import Fighter from './components/fighters/Fighter';
+import Matches from './components/matches/Matches';
 
 export default () => (
   <Layout>
@@ -14,5 +15,6 @@ export default () => (
     <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
     <Route exact={true} path='/fighters' component={Fighters} />
     <Route exact={true} path='/fighters/:number' component={Fighter} />
+    <Route exact={true} path='/matches' component={Matches} />
   </Layout>
 );

@@ -31,7 +31,12 @@ export default props => (
         </LinkContainer>
         <LinkContainer to={'/fighters'}>
           <NavItem>
-            <Glyphicon glyph='fire' /> Fighters
+            <Glyphicon glyph='user' /> Fighters
+          </NavItem>
+        </LinkContainer>
+        <LinkContainer to={'/matches'}>
+          <NavItem>
+            <Glyphicon glyph='fire' /> Matches
           </NavItem>
         </LinkContainer>
       </Nav>
