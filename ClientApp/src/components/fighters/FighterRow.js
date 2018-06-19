@@ -1,15 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-// interface IFighterRowProps extends IFighter {
-//   rank: number;
-// }
-
 export default class FighterRow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <tr key={this.props.id}>

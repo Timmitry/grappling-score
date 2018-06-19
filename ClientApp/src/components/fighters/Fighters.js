@@ -7,7 +7,7 @@ import './Fighters.css';
 
 class Fighters extends React.Component {
   componentDidMount() {
-    this.props.fetchData('https://localhost:5001/api/fighters');
+    this.props.fetchData('/api/fighters');
   }
 
   render() {

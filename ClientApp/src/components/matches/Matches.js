@@ -6,11 +6,20 @@ import MatchRow from './MatchRow';
 
 class Matches extends React.Component {
   componentDidMount() {
-    this.props.fetchData('https://localhost:5001/api/matches');
+    this.props.fetchData('/api/matches');
   }
 
   fullName(fighter) {
     return `${fighter.firstName} ${fighter.lastName}`;
+  }
+
+  matchRowProps(match) {
+    return {
+      id: match.id,
+      fighter1: `${match.fighter1.firstName} ${match.fighter1.lastName}`,
+      fighter2: `${match.fighter2.firstName} ${match.fighter2.lastName}`,
+      result: match.result,
+    };
   }
 
   render() {
@@ -35,7 +44,7 @@ class Matches extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {matches.map(match => (<MatchRow id={match.id} fighter1={this.fullName(match.fighter1)} fighter2={this.fullName(match.fighter2)} result={match.result}/>))}
+            {matches.map(match => (<MatchRow {...this.matchRowProps(match)} />))}
           </tbody>
         </table>
       </div>

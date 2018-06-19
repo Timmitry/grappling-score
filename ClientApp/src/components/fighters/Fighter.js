@@ -6,7 +6,7 @@ import { actionCreators } from '../../store/Fighter';
 
 class Fighter extends React.Component {
   async componentDidMount() {
-    this.props.fetchData(`https://localhost:5001/api/fighters/${this.props.match.params.number}`)
+    this.props.fetchData(`/api/fighters/${this.props.match.params.number}`)
   }
 
   render() {
