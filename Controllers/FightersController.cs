@@ -8,52 +8,28 @@ namespace WebApi.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class FightersController :ControllerBase
+  public class FightersController : ControllerBase
   {
-    private readonly FighterContext fighterContext;
+    private readonly GrapplingContext context;
 
-    public FightersController(FighterContext fighterContext)
+    public FightersController(GrapplingContext grapplingContext)
     {
-      this.fighterContext = fighterContext;
-
-      if (this.fighterContext.Fighters.Count() == 0)
-      {
-        this.fighterContext.Fighters.AddRange(
-          new Fighter("Marcelo", "Garcia", 2100),
-          new Fighter("Roger", "Gracie", 2200),
-          new Fighter("Oli", "Geddes", 2000),
-          new Fighter("Thiago", "Abreu", 1900)
-        );
-        this.fighterContext.SaveChanges();
-      }
+      this.context = grapplingContext;
     }
 
     [HttpGet]
     public ActionResult<IEnumerable<Fighter>> GetAll()
     {
-      return this.fighterContext.Fighters.OrderBy(fighter => fighter.Rank).ToList();
+      return this.context.Fighters.OrderBy(fighter => fighter.Rank).ToList();
     }
 
     [HttpGet("{id}")]
     public ActionResult<Fighter> GetById(long id)
     {
-      this.CalculateRankings();
-
-      var record = this.fighterContext.Fighters.Find(id);
+      var record = this.context.Fighters.Find(id);
 
       if (record == null) return NotFound();
       return record;
-    }
-
-    private void CalculateRankings()
-    {
-      var index = 1;
-      this.fighterContext.Fighters
-        .OrderByDescending(fighter => fighter.Score)
-        .ToList()
-        .ForEach(fighter => fighter.Rank = index++);
-
-      this.fighterContext.SaveChanges();
     }
   }
 }
