@@ -1,5 +1,5 @@
-using System;
 using System.Linq;
+using WebApi.Data.Importers;
 using WebApi.Models;
 
 namespace WebApi.Data
@@ -13,24 +13,8 @@ namespace WebApi.Data
       if (context.Fighters.Any())
         return;
 
-      var fighters = new[]
-      {
-        new Fighter("Marcelo", "Garcia", 2100),
-        new Fighter("Roger", "Gracie", 2200),
-        new Fighter("Oli", "Geddes", 2000),
-        new Fighter("Thiago", "Abreu", 1900),
-        new Fighter("Marcus", "Almeida", 2150)
-      };
-
+      var (fighters, matches) = BjjHeroesImporter.Import();
       context.Fighters.AddRange(fighters);
-      context.SaveChanges();
-
-      var matches = new[]
-      {
-        new Match(fighters[0], fighters[2], Result.Win),
-        new Match(fighters[1], fighters[0], Result.Loss),
-        new Match(fighters[4], fighters[1], Result.Draw),
-      };
       context.Matches.AddRange(matches);
       context.SaveChanges();
 

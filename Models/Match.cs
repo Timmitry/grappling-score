@@ -16,6 +16,9 @@ namespace WebApi.Models
     [JsonConverter(typeof(StringEnumConverter))]
     public Result Result { get; set; }
 
+    [DataMember]
+    public int Year { get; set; }
+
     public long Fighter1Id { get; set; }
 
     [DataMember]
@@ -30,11 +33,12 @@ namespace WebApi.Models
     {
     }
 
-    public Match(Fighter fighter1, Fighter fighter2, Result result)
+    public Match(Fighter fighter1, Fighter fighter2, Result result, int year)
     {
       this.Fighter1 = fighter1;
       this.Fighter2 = fighter2;
       this.Result = result;
+      this.Year = year;
     }
   }
 }
