@@ -23,6 +23,17 @@ namespace WebApi.Data
 
     private static void CalculateRankings(GrapplingContext context)
     {
+      var matchesByYear = context.Matches.OrderBy(match => match.Year);
+
+      foreach(var match in matchesByYear)
+      {
+        var scoreDifference = ScoreCalculator
+          .CalculateEloPoints(match.Result, match.Fighter1.Score, match.Fighter2.Score);
+        match.Fighter1.Score += scoreDifference;
+        match.Fighter2.Score -= scoreDifference;
+      }
+      context.SaveChanges();
+
       var index = 1;
       context.Fighters
         .OrderByDescending(fighter => fighter.Score)
