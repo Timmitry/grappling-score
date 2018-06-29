@@ -8,7 +8,7 @@ export default class FighterRow extends React.Component {
           <td>{this.props.rank}</td>
           <td><Link to={`/fighters/${this.props.id}`}>{this.props.firstName}</Link></td>
           <td>{this.props.lastName}</td>
-          <td>{this.props.score}</td>
+          <td>{Math.round(this.props.score)}</td>
         </tr>
     );
   }
