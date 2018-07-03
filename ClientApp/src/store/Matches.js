@@ -24,12 +24,12 @@ const fetchDataSuccess = matches => ({
 });
 
 export const actionCreators = {
-  fetchData: url => (
+  fetchData: () => (
     async (dispatch) => {
       dispatch(isLoading(true));
 
       try {
-        const response = await fetch(url);
+        const response = await fetch('/api/matches');
         if (!response.ok) { throw Error(response.statusText); }
         dispatch(isLoading(false));
         dispatch(fetchDataSuccess(await response.json()));

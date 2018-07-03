@@ -3,12 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/Matches';
 import MatchRow from './MatchRow';
+import WithDataFetching from "../generic/WithDataFetching";
 
 class Matches extends React.Component {
-  componentDidMount() {
-    this.props.fetchData('/api/matches');
-  }
-
   fullName(fighter) {
     return `${fighter.firstName} ${fighter.lastName}`;
   }
@@ -23,15 +20,6 @@ class Matches extends React.Component {
   }
 
   render() {
-    const { error, isLoading, matches } = this.props;
-
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    }
-    if (isLoading) {
-      return <div>Loading...</div>;
-    }
-
     return (
       <div>
         <h1>Matches</h1>
@@ -44,7 +32,7 @@ class Matches extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {matches.map(match => (<MatchRow {...this.matchRowProps(match)} />))}
+            {this.props.matches.map(match => (<MatchRow {...this.matchRowProps(match)} />))}
           </tbody>
         </table>
       </div>
@@ -55,4 +43,4 @@ class Matches extends React.Component {
 export default connect(
   state => state.matches,
   dispatch => bindActionCreators(actionCreators, dispatch)
-)(Matches);
+)(WithDataFetching(Matches));
