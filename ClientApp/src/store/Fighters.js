@@ -38,8 +38,9 @@ export const actionCreators = {
       try {
         const response = await fetch('/api/fighters');
         if (!response.ok) { throw Error(response.statusText); }
+        const json = await response.json();
         dispatch(isLoading(false));
-        dispatch(fetchDataSuccess(await response.json()));
+        dispatch(fetchDataSuccess(json));
       } catch(error) {
         dispatch(hasErrored);
       }
