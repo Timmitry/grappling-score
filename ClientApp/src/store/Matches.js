@@ -1,3 +1,5 @@
+import { fetchData } from "./Helpers";
+
 const hasErroredType = 'MATCHES_HAS_ERRORED';
 const isLoadingType = 'MATCHES_IS_LOADING';
 const fetchDataSuccessType = 'MATCHES_FETCH_DATA_SUCCESS';
@@ -24,21 +26,7 @@ const fetchDataSuccess = matches => ({
 });
 
 export const actionCreators = {
-  fetchData: () => (
-    async (dispatch) => {
-      dispatch(isLoading(true));
-
-      try {
-        const response = await fetch('/api/matches');
-        if (!response.ok) { throw Error(response.statusText); }
-        const json = await response.json();
-        dispatch(isLoading(false));
-        dispatch(fetchDataSuccess(json));
-      } catch(error) {
-        dispatch(hasErrored);
-      }
-    }
-  ),
+  fetchData: fetchData('/api/matches', isLoading, hasErrored, fetchDataSuccess),
 }
 
 export const reducer = (state = initialState, action) => {

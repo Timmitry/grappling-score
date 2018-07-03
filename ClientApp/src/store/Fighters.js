@@ -1,3 +1,5 @@
+import { fetchData } from './Helpers';
+
 const hasErroredType = 'FIGHTERS_HAS_ERRORED';
 const isLoadingType = 'FIGHTERS_IS_LOADING';
 const fetchDataSuccessType = 'FIGHTERS_FETCH_DATA_SUCCESS';
@@ -31,21 +33,7 @@ const setPage = pageNumber => ({
 });
 
 export const actionCreators = {
-  fetchData: () => (
-    async (dispatch) => {
-      dispatch(isLoading(true));
-
-      try {
-        const response = await fetch('/api/fighters');
-        if (!response.ok) { throw Error(response.statusText); }
-        const json = await response.json();
-        dispatch(isLoading(false));
-        dispatch(fetchDataSuccess(json));
-      } catch(error) {
-        dispatch(hasErrored);
-      }
-    }
-  ),
+  fetchData: fetchData('/api/fighters', isLoading, hasErrored, fetchDataSuccess),
   changePage: page => dispatch => dispatch(setPage(page)),
 }
 
