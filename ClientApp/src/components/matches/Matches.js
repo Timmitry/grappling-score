@@ -2,39 +2,28 @@ import * as React from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators } from '../../store/Matches';
-import MatchRow from './MatchRow';
 import WithDataFetching from "../generic/WithDataFetching";
+import MatchTable from "./MatchTable";
+import PageNavigator from "../fighters/PageNavigator";
 
 class Matches extends React.Component {
-  fullName(fighter) {
-    return `${fighter.firstName} ${fighter.lastName}`;
-  }
-
-  matchRowProps(match) {
-    return {
-      id: match.id,
-      fighter1: `${match.fighter1.firstName} ${match.fighter1.lastName}`,
-      fighter2: `${match.fighter2.firstName} ${match.fighter2.lastName}`,
-      result: match.result,
-    };
-  }
-
   render() {
+    const pageSize = 15;
+    const matches = this.props.matches.slice(
+      (this.props.currentPage - 1) * pageSize,
+      this.props.currentPage * pageSize
+    );
+
     return (
       <div>
         <h1>Matches</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Fighter 1</th>
-              <th>Fighter 2</th>
-              <th>Result</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.matches.map(match => (<MatchRow {...this.matchRowProps(match)} />))}
-          </tbody>
-        </table>
+        <MatchTable matches={matches} />
+        <PageNavigator
+          clickHandler={(pageNumber) => this.props.changePage(pageNumber)}
+          count={this.props.matches.length}
+          currentPage={this.props.currentPage}
+          pageSize={pageSize}
+        />
       </div>
     );
   }
