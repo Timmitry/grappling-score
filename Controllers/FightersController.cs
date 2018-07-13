@@ -17,10 +17,26 @@ namespace WebApi.Controllers
       this.context = grapplingContext;
     }
 
-    [HttpGet]
-    public ActionResult<IEnumerable<Fighter>> GetAll()
+    private bool Searcher(Fighter fighter, string search)
     {
-      return this.context.Fighters.OrderBy(fighter => fighter.Rank).ToList();
+      return fighter.LastName.Contains(search) || fighter.FirstName.Contains(search);
+    }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<Fighter>> GetAll(string search)
+    {
+      var fighters = this.context.Fighters.AsQueryable();
+
+      if (search != null)
+      {
+        Func<Fighter, bool> filter = (fighter) =>
+          fighter.LastName.Contains(search, StringComparison.InvariantCultureIgnoreCase) ||
+          fighter.FirstName.Contains(search, StringComparison.InvariantCultureIgnoreCase);
+
+        fighters = fighters.Where(fighter => filter(fighter));
+      }
+
+      return fighters.OrderBy(fighter => fighter.Rank).ToList();
     }
 
     [HttpGet("{id}")]

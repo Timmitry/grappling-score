@@ -33,7 +33,7 @@ const setPage = pageNumber => ({
 });
 
 export const actionCreators = {
-  fetchData: fetchData('/api/fighters', isLoading, hasErrored, fetchDataSuccess),
+  fetchData: fetchData('/api/fighters?search=Gracie', isLoading, hasErrored, fetchDataSuccess),
   changePage: page => dispatch => dispatch(setPage(page)),
 }
 
